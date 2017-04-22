@@ -1,0 +1,30 @@
+<script>
+	$(function() {
+
+		/*导航弹框*/  
+		$(".mui-icon-extra-class").click(function() {
+			$(".goods-nav").toggleClass("active");
+		}); 
+
+	});
+</script>
+<div class="ect-bg">
+	<header class="dis-box header-menu-1 b-color color-whie goods-fixed ts-3">
+	  <div class="goods-nav ts-3">
+		<ul class="goods-nav-box">
+		  <a href="{:url('/index')}">
+			<li><i class="iconfont icon-home j-nav-box"></i>首页</li>
+		  </a>
+		  <a href="{:url('/article/page','name=service')}">
+			<li><i class="iconfont icon-xiaoxi1 j-nav-box"></i>消息</li>
+		  </a>
+		  <a href="{:url('/user/usercenter')}">
+			<li><i class="iconfont icon-geren j-nav-box"></i>用户中心</li>
+		  </a>
+		  <a href="{:url('/order/orderlists')}">
+			<li style="border:none"><i class="iconfont icon-quanbudingdan j-nav-box"></i>全部订单</li>
+		  </a>
+		</ul>
+	  </div>
+	</header>     
+</div>

@@ -1,0 +1,27 @@
+<script>
+$(function(){
+	var path = window.location.pathname;
+	if(path.indexOf("goods") != -1){
+		$(".footer-nav").find("a").removeClass("active");
+		$(".footer-nav").find("a").eq(1).addClass("active");
+	}else{
+		$(".footer-nav").find("a").removeClass("active");
+		$(".footer-nav").find("a").eq(3).addClass("active");
+	}
+})
+</script>
+<footer class="footer-nav dis-box">
+	<a href="{:url('/index')}" class="box-flex nav-list active">
+		<i class="nav-box i-home"></i><span>首页</span>
+	</a>
+	<a href="{:url('/goods')}" class="box-flex nav-list">
+		<i class="nav-box i-cate"></i><span>分类</span>
+	</a>
+
+	<a href="{:url('/cart')}" class="box-flex position-rel nav-list">
+		<i class="nav-box i-flow"></i><span>购物车</span>
+	</a>
+	<a href="{:url('/user/usercenter')}" class="box-flex nav-list">
+		<i class="nav-box i-user"></i><span>我的</span>
+	</a>
+</footer>
