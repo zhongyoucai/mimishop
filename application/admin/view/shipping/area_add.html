@@ -1,0 +1,384 @@
+{include file="common:head"}
+<script src="STATIC_PATH/plugins/jQuery/jquery-1.9.1.min.js"></script>
+<script src="STATIC_PATH/../themes/default/wap/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<body class="skin-blue sidebar-mini wysihtml5-supported fixed">
+<div class="wrapper">
+
+{include file="common:header"}
+<!-- Left side column. contains the logo and sidebar -->
+{include file="common:navbar"}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       新建配送
+        <small>添加配送区域</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{:url('admin/index/index')}"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li><a href="{:url('admin/shipping/index')}">新建配送</a></li>
+        <li class="active"><a href="{:url('admin/shipping/area_add')}">添加配送区域</a></li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">添加配送区域</h3>
+            </div>
+            <div class="box-body no-padding">
+              <form method="post" action={:url('area_add')} id="area_add">
+                <div class="box-body">
+                <div class="form-group">
+                    <label for="uname" id="uname_label" class="uname">配送区域名称</label>
+                    <input class="form-control" id="shipping_area_name" name="shipping_area_name" value="" placeholder="配送区域名称" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="nname">费用计算方式</label>
+                  </div>
+                  <div class="form-group">
+                    <label><input type="radio" checked="true" onclick="compute_mode('weight')" name="fee_compute_mode" value="by_weight" checked="checked">&nbsp;&nbsp;按重量计算&nbsp;&nbsp;</label>
+                    <label><input type="radio" onclick="compute_mode('number')" name="fee_compute_mode" value="by_number">&nbsp;&nbsp;按商品件数计算</label>
+                  </div>
+                  <div class="by_weight">
+					  <div class="form-group">
+						<label for="exampleInputPassword1" class="email">1000克以内费用</label>
+						<input class="form-control" name="base_fee" id="base_fee" value="0" placeholder="1000克以内费用" type="text">
+					  </div>
+
+					  <div class="form-group">
+						<label for="exampleInputPassword1" class="email">5000克以内续重每1000克费用</label>
+						<input class="form-control" name="step_fee" id="step_fee" value="0" placeholder="5000克以内续重每1000克费用" type="text">
+					  </div>
+
+					  <div class="form-group">
+						<label for="exampleInputPassword1" class="email">5001克以上续重1000克费用</label>
+						<input class="form-control" name="step_fee1" id="step_fee1" value="0" placeholder="5001克以上续重1000克费用" type="text">
+					  </div>
+                  </div>
+                  <div class="by_number" style="display: none;">
+                  	<div class="form-group">
+						<label for="exampleInputPassword1" class="email">单件商品费用</label>
+						<input class="form-control" name="item_fee" id="item_fee" value="0" placeholder="单件商品费用" type="text">
+					  </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="email">免费额度</label>
+                    <input class="form-control" name="free_money" id="free_money" value="0" placeholder="免费额度" type="text">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="email">所辖地区 （不选则为全部省份）</label>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="area"></label>
+                  </div>
+                  <style>
+					  .selectList select{
+						  width: 100px;
+					  }
+				  </style>
+                 <div class="selectList">
+                 	<span style="vertical-align: top">省份：</span>
+					<select class="province" id="province" size="10">
+						<option>请选择</option>
+					</select>
+					<span style="vertical-align: top">城市：</span>
+					<select class="city" id="city" size="10">
+						<option>请选择</option>
+					</select>
+					<span style="vertical-align: top">区/县：</span>
+					<select class="district" id="district" size="10">
+						<option>请选择</option>
+					</select>
+					&nbsp;&nbsp;
+					<a href="javascript:;" onClick="addRegion()"><span style="vertical-align: top; ">+</span</a>
+
+				</div>
+            	
+                  <div class="pull-right">
+                  <input type="hidden" name="id" value="{$shipping_id}" >
+                <button class="btn btn-success" onclick="javascript:history.back(-1);return false;">返 回</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button"  class="btn btn-primary submit">确 定</button>
+              </div>
+              </form>
+
+<script type="text/javascript"> 
+$(function(){
+    $('.submit').click(function () {
+		
+		var shipping_area_name = $("#shipping_area_name").val();
+		var chkRadio 	= $('input:radio[name="fee_compute_mode"]:checked').val();
+		var base_fee 	= $("#base_fee").val();
+		var step_fee 	= $("#step_fee").val();
+		var step_fee1 	= $("#step_fee1").val();
+		var free_money 	= $("#free_money").val();
+		var item_fee 	= $("#item_fee").val();
+		var regions		= $("input[name='regions[]']").val();
+		
+		if(shipping_area_name == ""){
+			msgerr("配送区域名称不能为空！");
+			return false;
+		}
+		
+		if(chkRadio == 'by_weight'){
+			
+			if(base_fee == ''){
+				msgerr("1000克以内费用不能为空！");
+				return false;
+			}else if(isNaN(base_fee)){
+				msgerr("请填写正确的金额！");
+				return false;
+			}
+			
+			if(step_fee == ''){
+				msgerr("5000克以内续重每1000克费用不能为空！");
+				return false;
+			}else if(isNaN(step_fee)){
+				msgerr("请填写正确的金额！");
+				return false;
+			}
+			
+			if(step_fee == ''){
+				msgerr("5000克以内续重每1000克费用不能为空！");
+				return false;
+			}else if(isNaN(step_fee)){
+				msgerr("请填写正确的金额！");
+				return false;
+			}
+			
+			if(step_fee1 == ''){
+				msgerr("5001克以上续重1000克费用不能为空！");
+				return false;
+			}else if(isNaN(step_fee1)){
+				msgerr("请填写正确的金额！");
+				return false;
+			}
+			
+		}else if(chkRadio == 'by_number'){
+			
+			if(item_fee == ''){
+				msgerr("单件商品费用不能为空！");
+				return false;
+			}else if(isNaN(item_fee)){
+				msgerr("请填写正确的金额！");
+				return false;
+			}
+			
+		}
+		
+		if(free_money == ''){
+			msgerr("免费额度不能为空！");
+			return false;
+		}else if(isNaN(free_money)){
+			msgerr("请填写正确的金额！");
+			return false;
+		}
+		
+		if(typeof(regions) == "undefined"){
+			$(".area").append('<input name="regions[]" value="0" checked="true" type="checkbox">&nbsp;&nbsp;全国&nbsp;&nbsp;&nbsp;<input type="hidden" name="regions_name[]" value="全国">');
+		}
+		
+		
+        $.ajax({
+          cache: true,
+          type: "POST",
+          url: "{:url('shipping/area_add')}",
+          data: $('#area_add').serialize(),
+          async: false,
+            success: function(data) {
+              if (data.code) {
+                  msgok(data.msg);
+                  setTimeout(function () {
+                    location.href = data.url;
+                  }, 1000);
+              } else {
+                  msgerr(data.msg);
+              }
+
+            },
+            error: function(request) {
+              msgerr("页面错误");
+            }
+        });
+		return false;
+    });
+})
+
+function compute_mode(obj){
+	
+	if(obj == "weight"){
+		$(".by_weight").show();
+		$(".by_number").hide();
+	}
+	
+	if(obj == "number"){
+		$(".by_weight").hide();
+		$(".by_number").show();
+	}
+	
+}
+	
+function addRegion(){
+	
+	//地区码
+	var areaID 		= getAreaID();
+	var areaName 	= getAreaName();
+	var chk_value 	=[]; 
+	
+	$('input[name="regions[]"]:checked').each(function(){
+		
+		chk_value.push($(this).val());
+		
+	})
+	
+	if($.inArray(areaID, chk_value) == -1){
+		$(".area").append('<input name="regions[]" value="'+areaID+'" checked="true" type="checkbox">&nbsp;&nbsp;'+areaName+'&nbsp;&nbsp;&nbsp;<input type="hidden" name="regions_name[]" value="'+areaName+'">');
+	}else{
+		msgerr("对不起不能重复添加");
+		return false;
+	}
+	
+	
+
+}
+//得到地区码
+function getAreaID(){
+	
+	var province = $("#province").val();
+	var city 	 = $("#city").val();
+	var district = $("#district").val();
+	
+	if(district != 0){
+		area = district;
+	}else if(city != 0){
+		area = city;
+	}else if(province != 0){
+		area = province;
+	}
+	return area;
+}
+//根据地区码查询地区名
+function getAreaName(){
+	
+	var province = $("#province").find("option:selected").text();
+	var city 	 = $("#city").find("option:selected").text();
+	var district = $("#district").find("option:selected").text();
+	
+	if(district != "请选择"){
+		areaName = district;
+	}else if(city != "请选择"){
+		areaName = city;
+	}else if(province != "请选择"){
+		areaName = province;
+	}
+	return areaName;
+}
+$(function(){
+	$(".selectList").each(function(){
+		var areaJson = cityData3;
+		var temp_html;
+		var oProvince = $(this).find(".province");
+		var oCity = $(this).find(".city");
+		var oDistrict = $(this).find(".district");
+		//初始化省
+		var province = function(){
+			temp_html+="<option value='0' selected='selected'>请选择</option>";
+			$.each(areaJson,function(i,province){
+				temp_html+="<option value='"+province.value+"'>"+province.text+"</option>";
+			});
+			oProvince.html(temp_html);
+			city();
+			
+		};
+		//赋值市
+		var city = function(){
+			temp_html = ""; 
+			var n = oProvince.get(0).selectedIndex;
+			
+			temp_html+="<option value='0' selected='selected'>请选择</option>";
+
+			if(n != 0){
+				$.each(areaJson[n-1].children, function(i, city){
+					temp_html+="<option value='"+city.value+"'>"+city.text+"</option>";
+				})
+			}
+			
+			oCity.html(temp_html);
+			district();
+		};
+		//赋值县
+		var district = function(){
+			temp_html = ""; 
+			var m = oProvince.get(0).selectedIndex;
+			var n = oCity.get(0).selectedIndex;
+			
+			temp_html+="<option value='0' selected='selected'>请选择</option>";
+			
+			if(n != 0){
+				
+				$.each(areaJson[m-1].children[n-1].children,function(i,district){
+					temp_html+="<option value='"+district.value+"'>"+district.text+"</option>";
+				});
+			}
+			oDistrict.html(temp_html);
+		};
+		//选择省改变市
+		oProvince.change(function(){
+			city();
+		});
+		//选择市改变县
+		oCity.change(function(){
+			district();
+		});
+		
+		province();
+		
+	});
+});
+</script>
+             
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  {include file="common:footer"}
+</div>
+<!-- ./wrapper -->
+<script src="STATIC_PATH/plugins/jQueryUI/jquery-ui.min.js"></script>
+
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.6 -->
+<script src="STATIC_PATH/bootstrap/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src="STATIC_PATH/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="STATIC_PATH/dist/js/app.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,130 @@
+{include file="common:head"}
+<script src="STATIC_PATH/plugins/jQuery/jquery-1.9.1.min.js"></script>
+<body class="skin-blue sidebar-mini wysihtml5-supported fixed">
+<div class="wrapper">
+
+{include file="common:header"}
+<!-- Left side column. contains the logo and sidebar -->
+{include file="common:navbar"}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+       配送方式
+        <small>编辑配送方式</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{:url('admin/index/index')}"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li><a href="{:url('admin/shipping/index')}">配送方式</a></li>
+        <li class="active"><a href="{:url('admin/shipping/edit')}">编辑配送方式</a></li>
+      </ol>
+    </section>
+ 
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">编辑配送方式</h3>
+              
+            </div>
+            <div class="box-body no-padding">
+              <form method="post" action={:url('edit')} id="edit">
+                <div class="box-body">
+                <div class="form-group">
+                    <label for="uname" id="uname_label" class="uname">配送方式名称</label>
+                    <input class="form-control" id="shipping_name" name="shipping_name" value="{$shipInfo.shipping_name}" placeholder="配送方式名称" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="nname">配送方式描述</label>
+                    <input class="form-control" id="shipping_desc" name="shipping_desc" value="{$shipInfo.shipping_desc}" placeholder="配送方式描述" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="email">排序</label>
+                    <input class="form-control" name="shipping_order" id="shipping_order" value="{$shipInfo.shipping_order}" placeholder="排序" type="text">
+                  </div>
+            
+                  <div class="pull-right">
+                  <input type="hidden" class="form-control" id="id" value="{$shipInfo.shipping_id}" name="id"  />
+                <button class="btn btn-success" onclick="javascript:history.back(-1);return false;">返 回</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button"  class="btn btn-primary submit">确 定</button>
+              </div>
+              </form>
+
+<script type="text/javascript"> 
+$(function(){
+    $('.submit').click(function () {
+		var shipping_name = $("#shipping_name").val();
+		if(shipping_name == ""){
+			msgerr("配送方式名称不能为空！");
+			return false;
+		}
+        $.ajax({
+          cache: true,
+          type: "POST",
+           url: '{:url('shipping/edit')}',
+          data: $('#edit').serialize(),
+          async: false,
+            success: function(data) {
+              if (data.code) {
+                  msgok(data.msg);
+                  setTimeout(function () {
+                    location.href = data.url;
+                  }, 1000);
+              } else {
+                  msgerr(data.msg);
+              }
+
+            },
+            error: function(request) {
+				console.log(request);
+              msgerr("页面错误");
+            }
+        });
+    });
+          })
+     
+</script>
+             
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  {include file="common:footer"}
+</div>
+<!-- ./wrapper -->
+<script src="STATIC_PATH/plugins/jQueryUI/jquery-ui.min.js"></script>
+
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.6 -->
+<script src="STATIC_PATH/bootstrap/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src="STATIC_PATH/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- AdminLTE App -->
+<script src="STATIC_PATH/dist/js/app.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

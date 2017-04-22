@@ -1,0 +1,193 @@
+[ 2017-04-21T20:47:10+08:00 ] ::1 ::1 GET /mimishop/admin.php/bonus_type/index.html
+[ log ] localhost/mimishop/admin.php/bonus_type/index.html [运行时间：0.257052s][吞吐率：3.89req/s] [内存消耗：2,660.50kb] [文件加载：67]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] C:\phpStudy\WWW\mimishop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'bonus_type',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/mimishop/admin.php/index/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'bonus_arr=%5B%5B%2217%22%2C%2210.00%22%5D%5D; think_var=zh-cn; PHPSESSID=082nc2u1brsvb7nl773v6d0355',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] C:\phpStudy\WWW\mimishop/application/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'session_id',
+  'prefix' => 'mimishop',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] /**
+     * 修改个人资料
+     * @author 完美°ぜ界丶
+     */
+Method [ <user> public method index ] {
+  @@ C:\phpStudy\WWW\mimishop\application\admin\controller\BonusType.php 27 - 36
+}
+
+[ info ] [ VIEW ] C:\phpStudy\WWW\mimishop/application/admin\view\bonus_type\index.html [ array (
+  0 => 'menuTree',
+  1 => 'couponList',
+) ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT file
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=minishop;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_key_value` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `mini_key_value` WHERE  `collection` = 'indextheme' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_menu` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `hide` = 0   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_users` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `uuid` FROM `mini_users` WHERE  `id` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_key_value` WHERE  `uuid` = '7e7960af-31a1-c28b-8a63-779993023c74' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `uuid` FROM `mini_users` WHERE  `id` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_key_value` WHERE  `uuid` = '7e7960af-31a1-c28b-8a63-779993023c74' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_apiconfig` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_apiconfig`  [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_bonus_type` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `mini_bonus_type` ORDER BY start_time desc LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_bonus_type` ORDER BY start_time desc LIMIT 0,8   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 1  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 32 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 31 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 37 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 51 LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 51  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 52 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 53 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 71 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 71  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 72 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 73 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 74 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 2 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 2  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 38 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 3 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 3  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 39 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 40 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 81 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 4 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 4  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 54 LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 65 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 41 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 42 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 50 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 64 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 67 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 75 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 5 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 5  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 43 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 44 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 48 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 48  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 55 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 58 LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 49 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 56 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 68 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 68  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 70 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 69 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 76 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 76  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 77 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `id` = 78 LIMIT 1    [ RunTime:0.000000s ]
+[ error ] [8]未定义数组索引: number[C:\phpStudy\WWW\mimishop\runtime\temp\e5613bc63c1f80505803a8039cac87c5.php:237]
+
+---------------------------------------------------------------
+[ 2017-04-21T20:47:11+08:00 ] ::1 ::1 GET /mimishop/admin.php/bonus_type/index.html
+[ log ] localhost/mimishop/admin.php/bonus_type/index.html [运行时间：0.080016s][吞吐率：12.50req/s] [内存消耗：2,422.43kb] [文件加载：62]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] C:\phpStudy\WWW\mimishop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'bonus_type',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/mimishop/admin.php/index/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'bonus_arr=%5B%5B%2217%22%2C%2210.00%22%5D%5D; think_var=zh-cn; PHPSESSID=082nc2u1brsvb7nl773v6d0355',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] C:\phpStudy\WWW\mimishop/application/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'session_id',
+  'prefix' => 'mimishop',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] /**
+     * 修改个人资料
+     * @author 完美°ぜ界丶
+     */
+Method [ <user> public method index ] {
+  @@ C:\phpStudy\WWW\mimishop\application\admin\controller\BonusType.php 27 - 36
+}
+
+[ info ] [ VIEW ] C:\phpStudy\WWW\mimishop/application/admin\view\bonus_type\index.html [ array (
+  0 => 'menuTree',
+  1 => 'couponList',
+) ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT file
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006001s ] mysql:dbname=minishop;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_key_value` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `mini_key_value` WHERE  `collection` = 'indextheme' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_menu` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `hide` = 0   [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_users` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `uuid` FROM `mini_users` WHERE  `id` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_key_value` WHERE  `uuid` = '7e7960af-31a1-c28b-8a63-779993023c74' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `uuid` FROM `mini_users` WHERE  `id` = 1 LIMIT 1    [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_key_value` WHERE  `uuid` = '7e7960af-31a1-c28b-8a63-779993023c74' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_apiconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_apiconfig`  [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `mini_bonus_type` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `mini_bonus_type` ORDER BY start_time desc LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_bonus_type` ORDER BY start_time desc LIMIT 0,8   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 1  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 51  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 71  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 2  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 3  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 4  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 5  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 48  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `mini_menu` WHERE  `pid` = 68  AND (  instr('/mimishop/admin.php/bonus_type/index.html',`url`)>0 ) LIMIT 1    [ RunTime:0.000000s ]
+[ error ] [8]未定义数组索引: number[C:\phpStudy\WWW\mimishop\runtime\temp\e5613bc63c1f80505803a8039cac87c5.php:237]
+
+---------------------------------------------------------------
