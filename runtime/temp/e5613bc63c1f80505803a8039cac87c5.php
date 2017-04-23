@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"C:\phpStudy\WWW\mimishop/application/admin\view\bonus_type\index.html";i:1491897579;s:64:"C:\phpStudy\WWW\mimishop/application/admin\view\common\head.html";i:1482462994;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\header.html";i:1482462994;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\navbar.html";i:1477622210;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\footer.html";i:1490016441;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"C:\phpStudy\WWW\mimishop/application/admin\view\bonus_type\index.html";i:1492943863;s:64:"C:\phpStudy\WWW\mimishop/application/admin\view\common\head.html";i:1482462994;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\header.html";i:1482462994;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\navbar.html";i:1477622210;s:66:"C:\phpStudy\WWW\mimishop/application/admin\view\common\footer.html";i:1490016441;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,25 +177,11 @@
               <div class="pull-left">
               <select class="form-control input-sm setStatus" name="status">
                 <option value="0">批量操作</option>
-                <option value="1">上架优惠券</option>
-                <option value="2">下架优惠券</option>
                 <option value="delete">删除优惠券</option>
               </select>
               </div>
               <div class="pull-left" style="margin-left:10px;"> 
                 <button type="button" class="btn btn-block btn-default btn-sm setStatusSubmit">应用</button>
-              </div>
-              <div class="pull-left" style="margin-left:15px;">
-              <select class="form-control input-sm filterStatus" name="status">
-                <option value="0">所选状态</option>
-                <option value="1">上架优惠券</option>
-                <option value="2">下架优惠券</option>
-              </select>
-              </div>
-              <div class="pull-left" style="margin-left:10px;">
-              <select class="form-control input-sm filterCategory" name="category">
-                  <option value="0">所选分类</option>
-              </select>
               </div>
               <div class="pull-left" style="margin-left:15px;">
                 <a href="<?php echo url('add'); ?>" class="btn btn-block btn-primary btn-sm">添加优惠券</a>
@@ -216,46 +202,61 @@
                   <tr>
 					<th><input type="checkbox" class="selectAll"></th>
                     <th style="padding-left:25px;">ID</th>
-					<th>优惠券名字</th>
-					<th>发放类型</th>
-					<th>最小订单金额</th>
-                    <th>优惠券数量</th>
+				          	<th>优惠券名字</th>
+					          <th>发放类型</th>
+					          <th>最小订单金额</th>
                     <th>开始时间</th>
                     <th>结束时间</th>
                     <th>优惠券有效期</th>
-					<th>剩余优惠券数量</th>
-                  </tr>
+  					        <th>操作</th>
+                    </tr>
                   </thead>
                   <tbody>
-					<?php if(is_array($couponList) || $couponList instanceof \think\Collection): $i = 0; $__LIST__ = $couponList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+					       <?php if(is_array($couponList) || $couponList instanceof \think\Collection): $i = 0; $__LIST__ = $couponList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                     <tr>
-					  <td><input name="ids" class="postCheck" value="<?php echo $vo['type_id']; ?>" type="checkbox"></td>
+					            <td><input name="ids" class="postCheck" value="<?php echo $vo['type_id']; ?>" type="checkbox"></td>
                       <td style="padding-left:25px;"><?php echo $vo['type_id']; ?></td>
-					  <td><?php echo $vo['type_name']; ?></td>
-					  <td><?php echo $vo['send_type']; ?></td>
-					  <td><?php echo $vo['min_amount']; ?></td>
-                      <td><?php echo $vo['number']; ?></td>
+					            <td><?php echo $vo['type_name']; ?></td>
+					            <td>
+                      <?php if($vo['send_type'] == '0'): ?>
+                        按用户发放
+                      <?php elseif($vo['send_type'] == '1'): ?>
+                        按用户注册发放
+                      <?php elseif($vo['send_type'] == '2'): ?>
+                        按订单金额发放
+                      <?php elseif($vo['send_type'] == '3'): ?>
+                        线下发放
+                      <?php endif; ?>
+                      </td>
+					            <td><?php echo $vo['min_amount']; ?></td>
                       <td><?php echo date('Y-m-d',$vo['start_time']); ?></td>
                       <td><?php echo date('Y-m-d',$vo['end_time']); ?></td>
                       <td>
-                          <?php echo $vo['term']; ?>
+                          领取<?php echo $vo['term']; ?>天后
                       </td>
-					  <td><?php echo $vo['sy_number']; ?></td>
+					            <td>
+                      <?php if($vo['send_type'] == '0'): ?>
+                        <a href="<?php echo url('send',['id'=>$vo['type_id'],'type'=>0]); ?>">发放</a>
+                      <?php else: ?>
+                        <a href="#">发放</a>
+                      <?php endif; ?>
+                        <a href="">查看</a>
+                        <a href="<?php echo url('edit',['id'=>$vo['type_id']]); ?>">编辑</a>
+                      </td>
                     </tr>
-					<?php endforeach; endif; else: echo "" ;endif; ?>
+					       <?php endforeach; endif; else: echo "" ;endif; ?>
                   </tbody>
                   <thead>
                   <tr>
-					<th><input type="checkbox" class="selectAll"></th>
+					       <th><input type="checkbox" class="selectAll"></th>
                     <th style="padding-left:25px;">ID</th>
-					<th>优惠券名字</th>
-					<th>发放类型</th>
-					<th>最小订单金额</th>
-                    <th>优惠券数量</th>
+					          <th>优惠券名字</th>
+					          <th>发放类型</th>
+					          <th>最小订单金额</th>
                     <th>开始时间</th>
                     <th>结束时间</th>
                     <th>优惠券有效期</th>
-					<th>剩余优惠券数量</th>
+					          <th>操作</th>
                   </tr>
                   </thead>
                 </table>
@@ -267,7 +268,7 @@
             <div class="box-footer with-border">
 
               <div class="pull-right">
-				<?php echo $couponList->render(); ?>
+				      <?php echo $couponList->render(); ?>
               </div>
               <!-- /.box-tools -->
             </div>

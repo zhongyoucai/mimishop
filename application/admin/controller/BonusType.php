@@ -35,44 +35,93 @@ class BonusType extends Common
         return $this->fetch();
     }
     //添加优惠券
-	public function add(){
-		if(Request::instance()->isPost()){
-			//接受POST数据
-			$couponname = input('post.couponname');//优惠券名字
-			$sendtype = input('post.sendtype');//优惠券类型
-			$minamount = input('post.minamount');//最小订单金额
-			$couponnumber = input('post.couponnumber');//数量
-			$starttime = strtotime(input('post.starttime'));//开始时间
-			$endtime = strtotime(input('post.endtime'));//结束时间
-			$term = input('post.term');//优惠券有效期
-			// 实例化验证器
-            $validate = Loader::validate('BonusType'); 
-			// 验证数据
-            $data     = ['couponname'=>$couponname,'minamount'=>$minamount,'couponnumber'=>$couponnumber,'starttime'=>$starttime,'endtime'=>$endtime,'term'=>$term];
-			// 验证
-            if (!$validate->scene('addBonusType')->check($data)) {
-                return $this->error($validate->getError());
-             } 
-			$value['type_name'] = $couponname;
-			$value['send_type'] = $sendtype;
-			$value['min_amount'] = $minamount;
-			$value['number'] = $couponnumber;
-			$value['start_time'] = $starttime;
-			$value['end_time'] = $endtime;
-			$value['term'] = $term;
-			//$value['status']        = '1';
-			//插入数据表
-            $res = Db::name('BonusType')->insert($value);
-			if($res) {
-              return $this->success('添加成功',url('admin/BonusType/index'));
-            } else {
-              return $this->error('添加失败');
-            }
-		}else {
-            return $this->fetch();
+  	public function add(){
+  		if(Request::instance()->isPost()){
+  			//接受POST数据
+  			$couponname = input('post.couponname');//优惠券名字
+  			$sendtype = input('post.sendtype');//优惠券类型
+  			$minamount = input('post.minamount');//最小订单金额
+  			$starttime = strtotime(input('post.starttime'));//开始时间
+  			$endtime = strtotime(input('post.endtime'));//结束时间
+  			$term = input('post.term');//优惠券有效期
+
+  			$value['type_name'] = $couponname;
+  			$value['send_type'] = $sendtype;
+  			$value['min_amount'] = $minamount;
+  			$value['start_time'] = $starttime;
+  			$value['end_time'] = $endtime;
+  			$value['term'] = $term;
+  			//$value['status']        = '1';
+  			//插入数据表
+              $res = Db::name('BonusType')->insert($value);
+  			if($res) {
+                return $this->success('添加成功',url('admin/BonusType/index'));
+              } else {
+                return $this->error('添加失败');
+              }
+  		}else {
+              return $this->fetch();
+          }
+  	}
+    //添加优惠券
+    public function edit(){
+      if(Request::instance()->isPost()){
+        //接受POST数据
+        $couponname = input('post.couponname');//优惠券名字
+        $sendtype = input('post.sendtype');//优惠券类型
+        $minamount = input('post.minamount');//最小订单金额
+        $starttime = strtotime(input('post.starttime'));//开始时间
+        $endtime = strtotime(input('post.endtime'));//结束时间
+        $term = input('post.term');//优惠券有效期
+        $id = input('post.id');
+
+        $value['type_name'] = $couponname;
+        $value['send_type'] = $sendtype;
+        $value['min_amount'] = $minamount;
+        $value['start_time'] = $starttime;
+        $value['end_time'] = $endtime;
+        $value['term'] = $term;
+
+        $res = Db::name('bonus_type')->where('type_id',$id)->update($value);
+
+        if($res) {
+          return $this->success('编辑成功',url('admin/BonusType/index'));
+        } else {
+          return $this->error('编辑失败');
         }
-	} 
-	/**
+      }else {
+
+        $id = input("id");
+        if(empty($id)){
+          return $this->error('非法请求');
+        }
+        $bonus_info = DB::name("bonus_type")->where("type_id",$id)->find();
+
+        $this->assign('bonus_info',$bonus_info);
+        return $this->fetch();
+      }
+    } 
+    /**
+     * 发放优惠券
+     * @author tangtanglove
+     */
+    public function send(){
+
+      $id   = input("id");
+      $type = input("type");
+
+      //按照用户发放
+      if($type == '0'){
+        if(Request::instance()->isPost()){
+
+        }else{
+
+          return $this->fetch("userbonus");
+        }
+      }
+    }
+
+	  /**
      * 设置文章状态
      * @author tangtanglove
      */

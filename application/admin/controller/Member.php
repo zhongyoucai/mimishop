@@ -105,10 +105,11 @@ class Member extends Common
             if (!$validate->scene('edit')->check($data)) {
                 return $this->error($validate->getError());
              } 
-            $getStatus     = Db::name('Users')->where('id',$data['id'])->update($data);
-            if($getStatus !== false){
+             $data['rank_id'] = $this->user_rank($data['rank_score']);
+             $getStatus     = Db::name('Users')->where('id',$data['id'])->update($data);
+             if($getStatus !== false){
                 return $this->success('编辑成功',url('admin/member/index'));
-            } else {
+             } else {
                   return $this->error('编辑失败');
               }
       } else {
@@ -116,8 +117,14 @@ class Member extends Common
               if (empty($id)) {
               return $this->error('请选择有效数据');
           }   
-          $map['id']     = $id;          
-          $usersInfo      = Db::name('Users')->where($map)->find();              
+          $map['u.id']     = $id;
+
+          $usersInfo = Db::name('Users')
+            ->alias('u')
+            ->join('user_rank r','u.rank_id= r.rank_id','LEFT')
+            ->where($map)
+            ->find();
+
           $this->assign('usersInfo',$usersInfo);
           return $this->fetch('edit');
       }
@@ -177,5 +184,17 @@ class Member extends Common
       }
     } 
   }
+  /* 计算会员等级 */
+  public function user_rank($rank_score){
 
+    $rank_list = Db::name("user_rank")->order("max_points asc")->select();
+
+    foreach($rank_list as $key=>$val){
+
+      if($rank_score < $val['max_points']){
+        return $val['rank_id'];
+      }
+
+    }
+  }
 }
