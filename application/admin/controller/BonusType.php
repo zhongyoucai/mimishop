@@ -114,8 +114,39 @@ class BonusType extends Common
       if($type == '0'){
         if(Request::instance()->isPost()){
 
+          $bonusinfo = Db::name("bonus_type")->field('term')->where('type_id',$id)->find();
+
+          $term = strtotime("+".$bonusinfo['term']." day");
+          $usertype = input("post.usertype");
+          $rankid   = input("post.rankid");
+
+          if($usertype == 0){
+            $userlist = Db::name("users")->where('rank_id',$rankid)->field('id')->select();
+            foreach ($userlist as $key => $value) {
+              # code...
+              $data['bonus_type_id'] = $id;
+              $data['user_id'] = $value['id'];
+              $data['bonus_end_time'] = $term;
+              $data['add_time'] = time();
+
+              $res = Db::name("user_bonus")->insert($data);
+              if(!$res){
+                return $this->error('添加失败');
+              }
+            }
+
+            if($res){
+                return $this->success('添加成功',url('admin/BonusType/index'));
+             }
+          }else{
+
+          }
+
         }else{
 
+          $rank_list = Db::name("user_rank")->field('rank_id,rank_name')->select();
+          $this->assign('rank_list', $rank_list);
+          $this->assign('id', $id);
           return $this->fetch("userbonus");
         }
       }

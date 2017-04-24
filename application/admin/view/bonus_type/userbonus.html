@@ -33,19 +33,24 @@
               </div>
             </div>
             <div class="box-body no-padding">
-              <form role="form" id="addCategoryForm" action="{:url('categoryEdit')}" method="post">
+              <form role="form" id="addRankForm" action="{:url('send')}" method="post">
                 <div class="box-body">
                   <div class="form-group">
                     <label for="exampleInputPassword1">会员等级</label>
-                    <select class="form-control" name="pid" id="pid">
+                    <select class="form-control" name="rankid" id="rankid">
                       <option value="0">无</option>
-                      
+                      {volist name="rank_list" id="vo"}
+                      <option value="{$vo.rank_id}">{$vo.rank_name}</option>
+                      {/volist}
                     </select>
                   </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <div id="addCategoryFormSubmit" class="btn btn-primary">添加优惠券</div>
+                  <input type="hidden" name="usertype" value="0">
+                  <input type="hidden" name="type" value="0">
+                  <input type="hidden" name="id" value="{$id}">
+                  <div id="addRankFormSubmit" class="btn btn-primary">添加优惠券</div>
                 </div>
               </form>
             </div>
@@ -152,23 +157,18 @@
 <script type="text/javascript" src="STATIC_PATH/plugins/webuploader/dist/onefile.js"></script>
 <script type="text/javascript">
   $('document').ready(function (argument) {
-      $('#addCategoryFormSubmit').click(function () {
-		  var name = $("input[name='name']").val();
-		  var slug = $("input[name='slug']").val();
-		  if(name == ""){
-			  msgerr("名称不能为空");
-			  return false;
-		  }
-		  if(slug == ""){
-			  msgerr("别名不能为空");
-			  return false;
-		  }
+      $('#addRankFormSubmit').click(function () {
+        var rankid = $("#rankid").val();
+  		  if(rankid == 0){
+  			  msgerr("请选择会员等级");
+  			  return false;
+  		  }
 		  
         $.ajax({
           cache: true,
           type: "POST",
-          url : $('#addCategoryForm').attr('action'),
-          data: $('#addCategoryForm').serialize(),
+          url : $('#addRankForm').attr('action'),
+          data: $('#addRankForm').serialize(),
           async: false,
             success: function(data) {
               if (data.code) {
